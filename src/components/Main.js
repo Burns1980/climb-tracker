@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import InputField from './InputField';
+import RouteForm from './RouteForm';
 
 export default class Main extends React.PureComponent {
   constructor() {
@@ -22,7 +22,9 @@ export default class Main extends React.PureComponent {
     return (
       <div>
         <h1>Hello World</h1>
-        <InputField />
+        <RouteForm 
+          pageNum={this.state.pageNum}
+        />        
       </div>
     );
     
