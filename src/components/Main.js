@@ -16,15 +16,32 @@ export default class Main extends React.PureComponent {
     }
   }
 
+  addRoute = routeObj => {
+    console.log("Inside main addRoute");
+    console.log(routeObj);
+
+    this.setState({allRoutes: [...this.state.allRoutes, routeObj]}, _=> {
+      console.log(this.state);
+    });
+  };
+
+  searchForRoute = routeObj => {
+    console.log("Inside searchForRoute");
+    console.log(routeObj);
+    
+  };
+
   render () {
     console.log("inside render of main");
+
+    // const { addRoute } = this;
+    // const restInterface = { addRoute };
 
     return (
       <div>
         <h1>Hello World</h1>
-        <RouteForm 
-          pageNum={this.state.pageNum}
-        />        
+        <RouteForm formFunction="add" addRoute={this.addRoute} id="addRouteForm" />        
+        <RouteForm formFunction="search" searchForRoute={this.searchForRoute} id="searchRouteForm" />
       </div>
     );
     

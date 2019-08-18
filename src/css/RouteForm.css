@@ -7,10 +7,12 @@
 }
 
 .addForm {
+  margin: 2rem;
   width: 40vw;
   font-size: 1.6rem;
   background: rgba(74, 104, 141, 0.705);
   display: grid;
+  border-radius: 1rem;
 }
 
 .formGroup {
@@ -40,7 +42,7 @@ select {
   border-radius: 0.5rem;
 }
 
-.addRouteBtn {
+.addRouteBtn, .searchRouteBtn {
   width: 40%;
   height: 3rem;
   font-size: 2rem;
@@ -52,7 +54,7 @@ select {
   border-radius: 1rem;
 }
 
-.addRouteBtn:active {
+.addRouteBtn:active, .searchRouteBtn:active {
   background: #eee;
   color: #000;
 }

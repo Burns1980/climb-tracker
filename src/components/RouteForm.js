@@ -11,46 +11,80 @@ export default class RouteForm extends React.PureComponent {
       style: "",
       type: "",
       rating: "",
-      stars: "",
+      stars:"",
       pitches: "",
-      date: null,
+      date: "",
     };
   }
 
   handleChange = e => {
     e.preventDefault();
     const {name, value} = e.target;
-
     if(name === "stars" || name === "pitches") {
-      this.setState({[name]: value}, _=> console.log(this.state))
+      this.setState({[name]: parseInt(value)})
     }
-    
-    this.setState({[name]: value}, _=> console.log(this.state))
+
+    else {
+      this.setState({[name]: value}, _=> {
+        // console.log(this.state)
+      });
+    }
   };
 
-  addRoute = _=> {
+  resetState = _=> {
+    this.setState({
+      rtName: "",
+      location: "",
+      style: "",
+      type: "",
+      rating: "",
+      stars: "",
+      pitches: "",
+      date: "",
+    });
+  }
 
+  addRoute = _=> {
+    console.log("inside add route in form");
+    if(!this.state.rtName || !this.state.location) return;
+    
+    this.props.addRoute({...this.state});
+    this.resetState();
+  };
+
+  searchRoute = _=> {
+    console.log("inside search route from");
+    console.log(this.state);
+    this.resetState();
   };
 
   render() {
-    console.log("***********PROPS INSIDE ROUTEFORM: ******************");
-    console.log(this.props);
+    // console.log("***********PROPS INSIDE ROUTEFORM: ******************");
+    // console.log(this.props);
     // console.log("*************State Inside RouteFrom**********:");
     // console.log(this.state);
+    let button;
+
+    if(this.props.formFunction === "add") {
+      button = <button type="button" form="addRouteForm" className="btn addRouteBtn" onClick={this.addRoute} >Add Route</button>;
+    }
+    else {
+      button = <button type="button" form="searchRouteForm" className="btn searchRouteBtn" onClick={this.searchRoute} >Search</button>;
+    }
     
     return (
-      <form className="addForm" id="addRouteForm">
+      <form className="addForm" id={this.props.id} autoComplete="off">
         <div className="row">
           <div className="formGroup">
             <label htmlFor="rtNameAddInput">Route Name*</label>
             <input
               id="rtNameAddInput"
               type="text"
+              value={this.state.rtName}
               name="rtName"
               placeholder=""
               // value={this.state.rtName}
               onChange={this.handleChange}
-              required
             />
           </div>
           <div className="formGroup">
@@ -58,39 +92,57 @@ export default class RouteForm extends React.PureComponent {
             <input
               id="locationAddInput"
               type="text"
+              value={this.state.location}
               name="location"
               placeholder=""
               // value={this.state.location}
               onChange={this.handleChange}
-              required
             />
           </div>
           <div className="formGroup">
-            <label htmlFor="typeAddInput">Type</label>
+            <label htmlFor="styleAddInput">Style</label>
             <select
               className="selectInput"
-              id="typeAddInput"
-              name="type"
-              // value={this.state.type}
+              id="styleAddInput"
+              value={this.state.style}
+              name="style"
               onChange={this.handleChange}
             >
-              <option value="trad">trad</option>
-              <option value="sport">sport</option>
-              <option value="boulder">boulder</option>
+              <option value=""></option>
+              <option value="lead">lead</option>
+              <option value="top rope">top rope</option>
               <option value="solo">solo</option>
-              <option value="aid">aid</option>
+              <option value="follow">follow</option>
             </select>
           </div>
         </div>
         <div className="row">
           <div className="formGroup">
+            <label htmlFor="typeAddInput">Type</label>
+            <select
+              className="selectInput"
+              id="typeAddInput"
+              value={this.state.type}
+              name="type"
+              onChange={this.handleChange}
+            >
+              <option value=""></option>
+              <option value="trad">trad</option>
+              <option value="sport">sport</option>
+              <option value="boulder">boulder</option>
+              <option value="aid">aid</option>
+            </select>
+          </div>
+          <div className="formGroup">
             <label htmlFor="ratingAddInput">Rating</label>
             <select
               id="ratingAddInput"
+              value={this.state.rating}
               name="rating"
               onChange={this.handleChange}
               className="selectInput"
             >
+              <option value=""></option>
               <option value="5.0">5.0</option>
               <option value="5.1">5.1</option>
               <option value="5.2">5.2</option>
@@ -136,6 +188,7 @@ export default class RouteForm extends React.PureComponent {
             <select
               className="selectInput"
               id="starsAddInput"
+              value={this.state.stars}
               name="stars"
               onChange={this.handleChange}
             >
@@ -146,28 +199,30 @@ export default class RouteForm extends React.PureComponent {
               <option value="4">4</option>
             </select>
           </div>
+        </div>
+        <div className="row">
           <div className="formGroup">
             <label htmlFor="pitchesAddInput">Pitches</label>
             <input
               id="pitchesAddInput"
               type="number"
+              value={this.state.pitches}
               name="pitches"
               onChange={this.handleChange}
             />
           </div>
-        </div>
-        <div className="row">
           <div className="formGroup">
             <label htmlFor="dateAddInput">Date</label>
             <input
               id="dateAddInput"
               type="date"
+              value={this.state.date}
               name="date"
               onChange={this.handleChange}
             />
           </div>
         </div>
-        <button type="button" form="addRouteForm" className="btn addRouteBtn" onClick={this.addRoute} >Add Route</button>
+        {button}
       </form>
     );
   }
