@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/RouteForm.css';
+
 export default class RouteForm extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -9,8 +11,8 @@ export default class RouteForm extends React.PureComponent {
       style: "",
       type: "",
       rating: "",
-      stars: 0,
-      pitches: 1,
+      stars: "",
+      pitches: "",
       date: null,
     };
   }
@@ -18,10 +20,16 @@ export default class RouteForm extends React.PureComponent {
   handleChange = e => {
     e.preventDefault();
     const {name, value} = e.target;
-    // console.log("Inside HandlChange********");
-    // console.log(name, value);
+
+    if(name === "stars" || name === "pitches") {
+      this.setState({[name]: value}, _=> console.log(this.state))
+    }
     
     this.setState({[name]: value}, _=> console.log(this.state))
+  };
+
+  addRoute = _=> {
+
   };
 
   render() {
@@ -31,10 +39,10 @@ export default class RouteForm extends React.PureComponent {
     // console.log(this.state);
     
     return (
-      <form className="clearfix" id="addRouteForm">
+      <form className="addForm" id="addRouteForm">
         <div className="row">
           <div className="formGroup">
-            <label htmlFor="rtNameAddInput">Route Name *</label>
+            <label htmlFor="rtNameAddInput">Route Name*</label>
             <input
               id="rtNameAddInput"
               type="text"
@@ -46,7 +54,7 @@ export default class RouteForm extends React.PureComponent {
             />
           </div>
           <div className="formGroup">
-            <label htmlFor="locationAddInput">Location *</label>
+            <label htmlFor="locationAddInput">Location*</label>
             <input
               id="locationAddInput"
               type="text"
@@ -159,6 +167,7 @@ export default class RouteForm extends React.PureComponent {
             />
           </div>
         </div>
+        <button type="button" form="addRouteForm" className="btn addRouteBtn" onClick={this.addRoute} >Add Route</button>
       </form>
     );
   }
