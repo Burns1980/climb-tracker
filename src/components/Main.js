@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import RouteForm from './RouteForm';
+import '../css/Main.css'
 
 export default class Main extends React.PureComponent {
   constructor() {
@@ -38,8 +39,7 @@ export default class Main extends React.PureComponent {
     // const restInterface = { addRoute };
 
     return (
-      <div>
-        <h1>Hello World</h1>
+      <div className="reactMain">
         <RouteForm formFunction="add" addRoute={this.addRoute} id="addRouteForm" />        
         <RouteForm formFunction="search" searchForRoute={this.searchForRoute} id="searchRouteForm" />
       </div>

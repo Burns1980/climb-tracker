@@ -53,8 +53,11 @@ export default class RouteForm extends React.PureComponent {
   };
 
   searchRoute = _=> {
-    console.log("inside search route from");
-    console.log(this.state);
+    // add logic that requires at least one property to be filled in before searching
+    //
+    // console.log("inside search route from");
+    // console.log(this.state);
+    this.props.searchForRoute({...this.state});
     this.resetState();
   };
 
@@ -76,26 +79,24 @@ export default class RouteForm extends React.PureComponent {
       <form className="addForm" id={this.props.id} autoComplete="off">
         <div className="row">
           <div className="formGroup">
-            <label htmlFor="rtNameAddInput">Route Name*</label>
+            <label htmlFor="rtNameAddInput">Route Name</label>
             <input
               id="rtNameAddInput"
               type="text"
               value={this.state.rtName}
               name="rtName"
-              placeholder=""
-              // value={this.state.rtName}
+              placeholder={this.props.formFunction === "add" ? "Required" : ""}
               onChange={this.handleChange}
             />
           </div>
           <div className="formGroup">
-            <label htmlFor="locationAddInput">Location*</label>
+            <label htmlFor="locationAddInput">Location</label>
             <input
               id="locationAddInput"
               type="text"
               value={this.state.location}
               name="location"
-              placeholder=""
-              // value={this.state.location}
+              placeholder={this.props.formFunction === "add" ? "Required" : ""}
               onChange={this.handleChange}
             />
           </div>
