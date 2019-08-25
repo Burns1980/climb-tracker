@@ -118,7 +118,7 @@ export default class Main extends React.PureComponent {
           <RouteForm formFunction="search" searchForRoute={this.searchForRoute} id="searchRouteForm" />
         </div>
         <div className="rtTable">
-          <RouteTable routes={this.state.routesToDisplay} handleDelete={this.deleteRoute} />
+          <RouteTable routes={this.state.routesToDisplay} handleDelete={this.deleteRoute} userName="BrentZ"/>
         </div>
       </div>
     );

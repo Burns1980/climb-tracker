@@ -4,12 +4,34 @@ import RouteListItem from './RouteListItem';
 
 import '../css/RouteTable.css';
 
+const createHead = data => {
+
+  const columnNames = ["Route Name", "Location", "Style", "Type", "Rating", "Stars", "Pitches", "Picture", "Date Climbed"];
+
+  
+  return (
+    <tr>
+      {
+        columnNames.map((column, i) => (
+          <th key={i}>{column}</th>
+        ))
+      }
+    </tr>
+  );
+};
+
 const RouteTable = props => {
   const routes = props.routes;
   console.log("inside rouite table");
+
+  const head = createHead(props.routes);
   
   return(
     <table>
+    <caption>Routes {props.userName} has climbed</caption>
+      <thead>
+        {head} 
+      </thead>
       <tbody>
       {routes.map((route, i) => 
         {
