@@ -2,48 +2,38 @@ import React from 'react';
 
 import '../css/RouteTable.css';
 
+const createRow = data => {
+
+  const valuesToDisplay = [];
+
+  for(let keys of Object.keys(data)) {
+    if(keys === "id" || keys === "handleDelete") continue;
+    valuesToDisplay.push(data[keys]);
+  }
+
+  const row = valuesToDisplay.map((values, i) => (
+    <td key={`${i}-${data.id}`}>
+      {values}
+    </td>
+  ));
+  row.push(
+    <td key="buttonsForTheTable" className="tableBtns">
+      <button type="button" className="editBtn" >Edit</button>
+      <button type="button" className="deleteBtn" onClick={_ => data.handleDelete(data.id)}>Delete</button>
+    </td>
+  );
+  return row;
+};
+
 const RouteListItem = props => {
+
+  const tableBody = createRow(props);
+
   return (
-    <tr id={props.id}>
-      <td>
-        {props.rtName}
-      </td>
-      <td>
-        {props.location}
-      </td>
-      <td>
-        {props.rtStyle}
-      </td>
-      <td>
-        {props.type}
-      </td>
-      <td>
-        {props.rating}
-      </td>
-      <td>
-        {props.stars}
-      </td>
-      <td>
-        {props.pitches}
-      </td>
-      <td>
-        {props.img}
-      </td>
-      <td>
-        {props.date}
-      </td>
-      <td>
-        <button className="editRouteBtn" type="button">
-          Edit 
-        </button>
-      </td>
-      <td>
-        <button className="deleteRouteBtn" type="button">
-          Delete
-        </button>
-      </td>
+    <tr key={props.id} data-route-id={props.id}>
+      {tableBody}
     </tr>
   );
-}
+};
 
 export default RouteListItem;

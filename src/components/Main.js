@@ -72,9 +72,18 @@ export default class Main extends React.PureComponent {
       // console.log(this.state);
     })} 
 
+  getAllRoutes = async _=> {
+
+  };
+
+  getNRoutes = async _=> {
+
+  };
+
   addRoute = routeObj => {
     console.log("Inside main addRoute");
     console.log(routeObj);
+    // ****** ADD timestamp for firestore sorting. ************
 
     this.setState({allRoutes: [...this.state.allRoutes, routeObj]}, _=> {
       console.log(this.state);
@@ -85,6 +94,11 @@ export default class Main extends React.PureComponent {
     console.log("Inside searchForRoute");
     console.log(routeObj);
     
+  };
+
+  deleteRoute = routeObj => {
+    console.log("inside handle delete");
+    console.log(routeObj);
   };
 
   componentDidMount = _=> {
@@ -104,7 +118,7 @@ export default class Main extends React.PureComponent {
           <RouteForm formFunction="search" searchForRoute={this.searchForRoute} id="searchRouteForm" />
         </div>
         <div className="rtTable">
-          <RouteTable routes={this.state.routesToDisplay}/>
+          <RouteTable routes={this.state.routesToDisplay} handleDelete={this.deleteRoute} />
         </div>
       </div>
     );

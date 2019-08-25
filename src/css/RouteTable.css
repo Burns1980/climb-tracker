@@ -3,6 +3,6 @@
   background: black;
 }
 
-/* td {
-  color: white;
-} */
+td {
+  font-size: 1.6rem;
+} 
